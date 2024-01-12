@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb35h07aepkjx"]
+
+[ext_resource type="Material" uid="uid://bmrjfhxci2hkg" path="res://assets/materials/si-fi-cube.tres" id="1_etiah"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ybyj1"]
+
+[node name="Qube" type="MeshInstance3D"]
+material_override = ExtResource("1_etiah")
+mesh = SubResource("BoxMesh_ybyj1")

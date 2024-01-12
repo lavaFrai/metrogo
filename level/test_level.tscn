@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://drvwnwqwo0gh1"]
+
+[ext_resource type="Texture2D" uid="uid://biqp4wrjjitf" path="res://assets/textures/sky.jpg" id="1_agmp5"]
+[ext_resource type="PackedScene" uid="uid://bb35h07aepkjx" path="res://assets/prefabs/si-fi-qube.tscn" id="1_lkjnm"]
+[ext_resource type="Script" path="res://assets/script/rotation.gd" id="2_ju71s"]
+[ext_resource type="Material" uid="uid://4k0nbllr72of" path="res://assets/materials/gravel.tres" id="4_a6i6l"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qimuk"]
+panorama = ExtResource("1_agmp5")
+
+[sub_resource type="Sky" id="Sky_0l3hu"]
+sky_material = SubResource("PanoramaSkyMaterial_qimuk")
+
+[sub_resource type="Environment" id="Environment_4f4es"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_0l3hu")
+ssr_enabled = true
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_3iiyl"]
+
+[node name="testLevel" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 1.5, 1.5, 1.5)
+environment = SubResource("Environment_4f4es")
+fov = 60.0
+
+[node name="Qube" parent="." instance=ExtResource("1_lkjnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_ju71s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 10, 10, 10)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.5, 0)
+material_override = ExtResource("4_a6i6l")
+mesh = SubResource("BoxMesh_3iiyl")
